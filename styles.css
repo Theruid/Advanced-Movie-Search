@@ -1,0 +1,808 @@
+:root {
+    --primary-color: #2a4365;
+    --secondary-color: #4299e1;
+    --background-color: #f7fafc;
+    --text-color: #2d3748;
+    --border-color: #e2e8f0;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --panel-background: white;
+    --hover-color: #ebf8ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 100vh;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* Filters Panel */
+.filters-panel {
+    background: var(--panel-background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    height: calc(100vh - 2rem);
+    position: sticky;
+    top: 1rem;
+    overflow-y: auto;
+}
+
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.btn-clear {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.filter-section {
+    margin-bottom: 2rem;
+}
+
+.filter-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Sliders */
+.slider {
+    margin: 1rem 0;
+}
+
+.year-inputs {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.year-inputs input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.rating-display {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Genres Grid */
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.genre-tag {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.genre-tag.active {
+    background-color: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+/* Sort Select */
+.sort-select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+}
+
+/* Checkboxes */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.checkbox-container input {
+    margin-right: 0.5rem;
+}
+
+/* Main Content */
+.main-content {
+    padding: 1rem;
+}
+
+.search-header {
+    margin-bottom: 2rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.search-box {
+    flex: 1;
+    position: relative;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.toggle-watchlist-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toggle-watchlist-btn:hover {
+    background-color: #34495e;
+}
+
+.toggle-watchlist-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.toggle-watchlist-btn.active {
+    background-color: #e74c3c;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 8px;
+    padding: 12px;
+    display: none;
+}
+
+.suggestion-section {
+    margin-bottom: 16px;
+}
+
+.suggestion-section:last-child {
+    margin-bottom: 0;
+}
+
+.suggestion-section h4 {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0 0 8px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.suggestion-item:hover {
+    background-color: #f5f5f5;
+}
+
+.suggestion-item img {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 12px;
+}
+
+.suggestion-info {
+    flex: 1;
+}
+
+.suggestion-info .title {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.suggestion-info .sub {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.no-suggestions {
+    text-align: center;
+    padding: 16px;
+    color: #666;
+}
+
+.search-suggestions::-webkit-scrollbar {
+    width: 8px;
+}
+
+.search-suggestions::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+
+/* Results Section */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-btn.active {
+    background-color: var(--hover-color);
+}
+
+.view-btn svg {
+    fill: currentColor;
+}
+
+/* Results Container */
+.results-container {
+    position: relative;
+    min-height: 400px;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.movie-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s;
+    overflow: hidden;
+    position: relative;
+    animation: cardLoading 0.3s ease-out forwards;
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+}
+
+.movie-poster {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.movie-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.movie-poster:hover .movie-overlay {
+    opacity: 1;
+}
+
+.movie-overview {
+    color: white;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.movie-overview p {
+    margin: 0 0 0.5rem 0;
+}
+
+.movie-overview .director,
+.movie-overview .cast {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.movie-overview::-webkit-scrollbar {
+    width: 6px;
+}
+
+.movie-overview::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.movie-overview::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.movie-overview::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.movie-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.trailer-btn,
+.watchlist-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.trailer-btn:hover,
+.watchlist-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.watchlist-btn {
+    background-color: transparent;
+    border: 2px solid white;
+}
+
+.watchlist-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.watchlist-btn.in-watchlist {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.watchlist-btn.in-watchlist:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.watchlist-btn svg,
+.trailer-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.trailer-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.movie-info {
+    padding: 1rem;
+}
+
+.movie-info h3 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.movie-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.movie-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.movie-genres span {
+    background: var(--hover-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: #666;
+}
+
+/* Trailer Modal Styles */
+.trailer-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.trailer-content {
+    position: relative;
+    width: 90%;
+    height: 80%;
+    max-width: 1200px;
+}
+
+.close-trailer {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.close-trailer:hover {
+    color: #ff4081;
+}
+
+/* Watchlist Button Styles */
+.watchlist-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.watchlist-btn:hover {
+    background-color: #1976d2;
+}
+
+.watchlist-btn.in-watchlist {
+    background-color: #4caf50;
+}
+
+.watchlist-btn.in-watchlist:hover {
+    background-color: #388e3c;
+}
+
+.watchlist-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Tooltip */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+}
+
+[data-tooltip]:hover:before {
+    opacity: 1;
+    visibility: visible;
+    bottom: calc(100% + 5px);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 250px 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-panel {
+        position: fixed;
+        left: -100%;
+        width: 100%;
+        z-index: 1000;
+        transition: left 0.3s ease;
+    }
+
+    .filters-panel.active {
+        left: 0;
+    }
+}
+
+/* Watchlist Controls */
+.watchlist-controls {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.watchlist-sort {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    color: #2c3e50;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.watchlist-sort:hover {
+    border-color: var(--secondary-color);
+}
+
+.watchlist-btn.watched {
+    background-color: #27ae60;
+}
+
+.watchlist-btn.watched:hover {
+    background-color: #219a52;
+}
+
+/* Loader */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+.loader.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes cardLoading {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.movie-card.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-card.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Error Banner */
+.error-banner {
+    width: 100%;
+    padding: 12px 24px;
+    background: #f5f5f5;
+    border-left: 4px solid #f44336;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+}
+
+.error-banner .error-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.error-banner svg {
+    width: 24px;
+    height: 24px;
+    fill: #f44336;
+}
+
+.error-banner h3 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.error-banner p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.error-banner.warning {
+    border-left-color: #ff9800;
+}
+
+.error-banner.warning svg {
+    fill: #ff9800;
+}
+
+.error-banner.info {
+    border-left-color: #2196f3;
+}
+
+.error-banner.info svg {
+    fill: #2196f3;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Movie Search</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="filters-panel">
+            <div class="filters-header">
+                <h2>Filters</h2>
+                <button id="clearFilters" class="btn-clear">Clear All</button>
+            </div>
+
+            <div class="filter-section">
+                <h3>Year Range</h3>
+                <div id="yearSlider" class="slider"></div>
+                <div class="year-inputs">
+                    <input type="number" id="yearFrom" min="1900" max="2024">
+                    <span>to</span>
+                    <input type="number" id="yearTo" min="1900" max="2024">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Rating</h3>
+                <div id="ratingSlider" class="slider"></div>
+                <div class="rating-display">
+                    <span id="ratingValue">0+</span> stars
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Genres</h3>
+                <div id="genresList" class="genres-grid"></div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Sort By</h3>
+                <select id="sortBy" class="sort-select">
+                    <option value="popularity.desc">Popularity (High to Low)</option>
+                    <option value="vote_average.desc">Rating (High to Low)</option>
+                    <option value="release_date.desc">Release Date (Newest)</option>
+                    <option value="revenue.desc">Box Office (High to Low)</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <h3>Advanced Filters</h3>
+                <div class="advanced-filters">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="includeAdult">
+                        <span class="checkmark"></span>
+                        Include Adult Content
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="onlyWithPosters">
+                        <span class="checkmark"></span>
+                        Only with Posters
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="onlyWithRatings">
+                        <span class="checkmark"></span>
+                        Only with Ratings
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="search-header">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search for movies...">
+                        <div id="searchSuggestions" class="search-suggestions"></div>
+                    </div>
+                    <button id="toggleWatchlistBtn" class="toggle-watchlist-btn" type="button">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        Show Watchlist
+                    </button>
+                </div>
+                <div id="watchlistControls" class="watchlist-controls" style="display: none;">
+                    <select id="watchlistSort" class="watchlist-sort">
+                        <option value="date_added_desc">Recently Added</option>
+                        <option value="date_added_asc">Oldest Added</option>
+                        <option value="title_asc">Title A-Z</option>
+                        <option value="title_desc">Title Z-A</option>
+                        <option value="rating_desc">Highest Rated</option>
+                        <option value="rating_asc">Lowest Rated</option>
+                        <option value="year_desc">Newest First</option>
+                        <option value="year_asc">Oldest First</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="results-container">
+                <div class="results-header">
+                    <h2>Search Results</h2>
+                </div>
+                <div id="movieResults" class="movies-grid"></div>
+                <div id="loader" class="loader hidden">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <template id="movieCardTemplate">
+        <div class="movie-card">
+            <div class="poster-container">
+                <img class="movie-poster" src="" alt="">
+                <div class="movie-rating"></div>
+            </div>
+            <div class="movie-info">
+                <h3 class="movie-title"></h3>
+                <div class="movie-year"></div>
+                <div class="movie-genres"></div>
+            </div>
+        </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
